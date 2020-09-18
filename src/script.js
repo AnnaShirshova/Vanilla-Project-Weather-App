@@ -80,6 +80,3 @@ function search(event) {
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", search);
-
-
-//GitHub repository: https://github.com/AnnaShirshova/Vanilla-Project-Weather-App
