@@ -61,7 +61,6 @@ function search(event) {
 
      function showTemperature(response) {
      let temperature = Math.round(response.data.main.temp);
-     city = response.data.name;
      let pressure = Math.round(response.data.main.pressure);
      let humidity = Math.round(response.data.main.humidity);
      let wind = Math.round(response.data.wind.speed);
