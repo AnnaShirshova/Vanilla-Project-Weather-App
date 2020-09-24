@@ -64,6 +64,8 @@ function search(event) {
      let pressure = Math.round(response.data.main.pressure);
      let humidity = Math.round(response.data.main.humidity);
      let wind = Math.round(response.data.wind.speed);
+     let icon = response.data.weather[0].icon;
+     let description = response.data.weather[0].description;
 
      let h2 = document.querySelector("#temperature");
      h2.innerHTML = temperature; 
@@ -73,6 +75,9 @@ function search(event) {
      windSpeed.innerHTML = `${wind} km/h`;
      let press = document.querySelector("#pressure");
      press.innerHTML = `${pressure} Pa`;
+     let iconElement = document.querySelector("#icon");
+     iconElement.setAttribute = ("scr",`http://openweathermap.org/img/wn/${icon}@2x.png`);
+     iconElement.setAttribute = ("alt", description);
     }
 
      axios.get(apiUrl).then(showTemperature);
