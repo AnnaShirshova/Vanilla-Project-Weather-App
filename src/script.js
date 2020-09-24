@@ -76,8 +76,8 @@ function search(event) {
      let press = document.querySelector("#pressure");
      press.innerHTML = `${pressure} Pa`;
      let iconElement = document.querySelector("#icon");
-     iconElement.setAttribute = ("scr",`http://openweathermap.org/img/wn/${icon}@2x.png`);
-     iconElement.setAttribute = ("alt", description);
+     iconElement.setAttribute("scr",`http://openweathermap.org/img/wn/${icon}@2x.png`);
+     iconElement.setAttribute("alt", description);
     }
 
      axios.get(apiUrl).then(showTemperature);
