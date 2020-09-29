@@ -80,7 +80,41 @@ function search(event) {
      iconElement.setAttribute("alt", description);
     }
 
+    function displayForecast(response) {
+        let forecastElement = document.querySelector("#forecast");
+        let forecast = response.data.list[0];
+
+        function formatHours(timestamp) {
+            date = new Date(timestamp);
+            date = today.getDate();
+            hours = today.getHours();
+            if (hours < 10) {
+                hours = `0${hours}`;
+            }
+            minutes = today.getMinutes();
+            if (minutes <10) {
+                minutes = `0${minutes}`;
+            }
+            return `${hours}:${minutes}`;
+        }
+
+        forecastElement.innerHTML = `<div class="row">
+                    <div class="col-6">
+                        ${formatHours(forecast.dt * 1000)}
+                    </div>
+                    <div class="col-6" class="data">
+                        <p>
+                            <strong>${Math.round(forecast.main.temp_max)}°</strong> 
+                            | ${Math.round(forecast.main.temp_min)}°
+                        </p>
+                    </div>
+                </div>`;
+    }
+
+    let forecastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&appid=${apiKey}&&units=metric`;
+
      axios.get(apiUrl).then(showTemperature);
+     axios.get(forecastApiUrl).then(displayForecast);
 }
 
 let form = document.querySelector("#search-form");
