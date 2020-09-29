@@ -72,6 +72,8 @@ function search(event) {
 
      let h2 = document.querySelector("#temperature");
      h2.innerHTML = temperature; 
+     h6 = document.querySelector("#description");
+     h6.innerHTML = description;
      let hum = document.querySelector("#humidity");
      hum.innerHTML = `${humidity} %`;
      let windSpeed = document.querySelector("#wind");
