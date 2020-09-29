@@ -14,7 +14,6 @@ let month = months[today.getMonth()];
 
 h6.innerHTML = `${month} ${date}, ${hours}:${minutes}, ${year}`;
 
-
 // Conversion C --> F
 
 function convertToFahrenheit(event) {
@@ -22,7 +21,11 @@ function convertToFahrenheit(event) {
     let temperatureElement = document.querySelector("#temperature");
     let temperature = temperatureElement.innerHTML;
     temperature = Number(temperature);
-    temperatureElement.innerHTML = Math.round((temperature * 9 / 5) + 32); 
+    temperatureElement.innerHTML = Math.round((temperature * 9 / 5) + 32);
+    // forecastMax = Math.round(forecast.main.temp_max);
+    // forecastMin = Math.round(forecast.main.temp_min);
+    // forecastMax.innerHTML = Math.round((temperature * 9 / 5) + 32);
+    // forecastMin.innerHTML = Math.round((temperature * 9 / 5) + 32);
 }
 
 let fahrenheit = document.querySelector("#fahrenheit");
@@ -43,7 +46,7 @@ let celcius = document.querySelector("#celcius");
 celcius.addEventListener("click", convertToCelcius);
 
 
-// Search engine + real life data
+// Search engine + real life data + forecast
 
 function search(event) {
     event.preventDefault();
@@ -81,8 +84,6 @@ function search(event) {
     }
 
     function displayForecast(response) {
-        let forecastElement = document.querySelector("#forecast");
-        let forecast = response.data.list[0];
 
         function formatHours(timestamp) {
             date = new Date(timestamp);
@@ -98,67 +99,13 @@ function search(event) {
             return `${hours}:${minutes}`;
         }
 
-        forecastElement.innerHTML = `<div class="row">
-                    <div class="col-6">
-                        ${formatHours(forecast.dt * 1000)}
-                    </div>
-                    <div class="col-6" class="data">
-                        <p>
-                            <strong>${Math.round(forecast.main.temp_max)}°</strong> 
-                            | ${Math.round(forecast.main.temp_min)}°
-                        </p>
-                    </div>
-                </div>`;
-        
-        forecast = response.data.list[1]; 
-        forecastElement = document.querySelector("#forecast2");
-        forecastElement.innerHTML =  
-        `<div class="row">
-                    <div class="col-6">
-                        ${formatHours(forecast.dt * 1000)}
-                    </div>
-                    <div class="col-6" class="data">
-                        <p>
-                            <strong>${Math.round(forecast.main.temp_max)}°</strong> 
-                            | ${Math.round(forecast.main.temp_min)}°
-                        </p>
-                    </div>
-                </div>`;
-
-        forecast = response.data.list[2];
-        forecastElement = document.querySelector("#forecast3");
-        forecastElement.innerHTML =
-            `<div class="row">
-                    <div class="col-6">
-                        ${formatHours(forecast.dt * 1000)}
-                    </div>
-                    <div class="col-6" class="data">
-                        <p>
-                            <strong>${Math.round(forecast.main.temp_max)}°</strong> 
-                            | ${Math.round(forecast.main.temp_min)}°
-                        </p>
-                    </div>
-                </div>`;
-        
-        forecast = response.data.list[3];
-        forecastElement = document.querySelector("#forecast4");
-        forecastElement.innerHTML =
-            `<div class="row">
-                    <div class="col-6">
-                        ${formatHours(forecast.dt * 1000)}
-                    </div>
-                    <div class="col-6" class="data">
-                        <p>
-                            <strong>${Math.round(forecast.main.temp_max)}°</strong> 
-                            | ${Math.round(forecast.main.temp_min)}°
-                        </p>
-                    </div>
-                </div>`;
-        
-        forecast = response.data.list[4];
-        forecastElement = document.querySelector("#forecast5");
-        forecastElement.innerHTML =
-            `<div class="row">
+        let forecast = null;
+        for (let index = 0; index < 6; index++) {
+            
+            forecast = response.data.list[0];
+            let forecastElement = document.querySelector("#forecast");
+            forecastElement.innerHTML =
+                `<div class="row">
                     <div class="col-6">
                         ${formatHours(forecast.dt * 1000)}
                     </div>
@@ -170,6 +117,66 @@ function search(event) {
                     </div>
                 </div>`;
 
+            forecast = response.data.list[1];
+            forecastElement = document.querySelector("#forecast2");
+            forecastElement.innerHTML =
+                `<div class="row">
+                    <div class="col-6">
+                        ${formatHours(forecast.dt * 1000)}
+                    </div>
+                    <div class="col-6" class="data">
+                        <p>
+                            <strong>${Math.round(forecast.main.temp_max)}°</strong> 
+                            | ${Math.round(forecast.main.temp_min)}°
+                        </p>
+                    </div>
+                </div>`;
+
+            forecast = response.data.list[2];
+            forecastElement = document.querySelector("#forecast3");
+            forecastElement.innerHTML =
+                `<div class="row">
+                    <div class="col-6">
+                        ${formatHours(forecast.dt * 1000)}
+                    </div>
+                    <div class="col-6" class="data">
+                        <p>
+                            <strong>${Math.round(forecast.main.temp_max)}°</strong> 
+                            | ${Math.round(forecast.main.temp_min)}°
+                        </p>
+                    </div>
+                </div>`;
+
+            forecast = response.data.list[3];
+            forecastElement = document.querySelector("#forecast4");
+            forecastElement.innerHTML =
+                `<div class="row">
+                    <div class="col-6">
+                        ${formatHours(forecast.dt * 1000)}
+                    </div>
+                    <div class="col-6" class="data">
+                        <p>
+                            <strong>${Math.round(forecast.main.temp_max)}°</strong> 
+                            | ${Math.round(forecast.main.temp_min)}°
+                        </p>
+                    </div>
+                </div>`;
+
+            forecast = response.data.list[4];
+            forecastElement = document.querySelector("#forecast5");
+            forecastElement.innerHTML =
+                `<div class="row">
+                    <div class="col-6">
+                        ${formatHours(forecast.dt * 1000)}
+                    </div>
+                    <div class="col-6" class="data">
+                        <p>
+                            <strong>${Math.round(forecast.main.temp_max)}°</strong> 
+                            | ${Math.round(forecast.main.temp_min)}°
+                        </p>
+                    </div>
+                </div>`;
+        }
     }
 
     let forecastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&appid=${apiKey}&&units=metric`;
@@ -177,6 +184,7 @@ function search(event) {
      axios.get(apiUrl).then(showTemperature);
      axios.get(forecastApiUrl).then(displayForecast);
 }
+
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", search);
