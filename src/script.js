@@ -109,6 +109,67 @@ function search(event) {
                         </p>
                     </div>
                 </div>`;
+        
+        forecast = response.data.list[1]; 
+        forecastElement = document.querySelector("#forecast2");
+        forecastElement.innerHTML =  
+        `<div class="row">
+                    <div class="col-6">
+                        ${formatHours(forecast.dt * 1000)}
+                    </div>
+                    <div class="col-6" class="data">
+                        <p>
+                            <strong>${Math.round(forecast.main.temp_max)}°</strong> 
+                            | ${Math.round(forecast.main.temp_min)}°
+                        </p>
+                    </div>
+                </div>`;
+
+        forecast = response.data.list[2];
+        forecastElement = document.querySelector("#forecast3");
+        forecastElement.innerHTML =
+            `<div class="row">
+                    <div class="col-6">
+                        ${formatHours(forecast.dt * 1000)}
+                    </div>
+                    <div class="col-6" class="data">
+                        <p>
+                            <strong>${Math.round(forecast.main.temp_max)}°</strong> 
+                            | ${Math.round(forecast.main.temp_min)}°
+                        </p>
+                    </div>
+                </div>`;
+        
+        forecast = response.data.list[3];
+        forecastElement = document.querySelector("#forecast4");
+        forecastElement.innerHTML =
+            `<div class="row">
+                    <div class="col-6">
+                        ${formatHours(forecast.dt * 1000)}
+                    </div>
+                    <div class="col-6" class="data">
+                        <p>
+                            <strong>${Math.round(forecast.main.temp_max)}°</strong> 
+                            | ${Math.round(forecast.main.temp_min)}°
+                        </p>
+                    </div>
+                </div>`;
+        
+        forecast = response.data.list[4];
+        forecastElement = document.querySelector("#forecast5");
+        forecastElement.innerHTML =
+            `<div class="row">
+                    <div class="col-6">
+                        ${formatHours(forecast.dt * 1000)}
+                    </div>
+                    <div class="col-6" class="data">
+                        <p>
+                            <strong>${Math.round(forecast.main.temp_max)}°</strong> 
+                            | ${Math.round(forecast.main.temp_min)}°
+                        </p>
+                    </div>
+                </div>`;
+
     }
 
     let forecastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&appid=${apiKey}&&units=metric`;
