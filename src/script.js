@@ -91,7 +91,7 @@ function search(event) {
             date = new Date(timestamp);
             hours = date.getHours();
             if (hours < 10) {
-                hours = `${hours}`;
+                hours = `0${hours}`;
             }
             minutes = date.getMinutes();
             if (minutes <10) {
