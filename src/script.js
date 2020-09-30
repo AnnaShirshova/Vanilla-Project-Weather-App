@@ -89,12 +89,11 @@ function search(event) {
 
         function formatHours(timestamp) {
             date = new Date(timestamp);
-            date = today.getDate();
-            hours = today.getHours();
+            hours = date.getHours();
             if (hours < 10) {
-                hours = `0${hours}`;
+                hours = `${hours}`;
             }
-            minutes = today.getMinutes();
+            minutes = date.getMinutes();
             if (minutes <10) {
                 minutes = `0${minutes}`;
             }
