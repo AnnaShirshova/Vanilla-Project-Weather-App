@@ -16,7 +16,12 @@ h6.innerHTML = `${month} ${date}, ${hours}:${minutes}, ${year}`;
 
 // Conversion C --> F
 
+var isFahrenheit = false
+
 function convertToFahrenheit(event) {
+    if (isFahrenheit == true) {
+        return;
+    }
     event.preventDefault();
     let temperatureElement = document.querySelector("#temperature");
     let temperature = temperatureElement.innerHTML;
@@ -26,6 +31,7 @@ function convertToFahrenheit(event) {
     // forecastMin = Math.round(forecast.main.temp_min);
     // forecastMax.innerHTML = Math.round((temperature * 9 / 5) + 32);
     // forecastMin.innerHTML = Math.round((temperature * 9 / 5) + 32);
+    isFahrenheit = true;
 }
 
 let fahrenheit = document.querySelector("#fahrenheit");
@@ -35,11 +41,15 @@ fahrenheit.addEventListener("click", convertToFahrenheit);
 // Conversion F --> C
 
 function convertToCelcius(event) {
+    if (!isFahrenheit) {
+        return;
+    }
     event.preventDefault();
     let temperatureElement = document.querySelector("#temperature");
     let temperature = temperatureElement.innerHTML;
     temperature = Number(temperature);
-    temperatureElement.innerHTML = null;
+    temperatureElement.innerHTML = Math.round((5*temperature - 160)/9);
+    isFahrenheit = false;
 }
 
 let celcius = document.querySelector("#celcius");
